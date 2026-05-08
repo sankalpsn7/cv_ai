@@ -65,10 +65,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-H([User HR Query: Which candidate has experience with PostgreSQL?]) -->|FastAPI /chat_cv| I[Local FAISS Index]
-    I -- Semantic Search --> J[Top-K CV Chunks]
-    J -->|Prompt Engineering| K[Context + Query]
-    K -->|Groq API (Llama 3)| L[Targeted Answer]
+    H["User HR Query:<br/>Which candidate has experience with PostgreSQL?"]
+        -->|FastAPI /chat_cv| I["Local FAISS Index"]
+
+    I -->|Semantic Search| J["Top-K CV Chunks"]
+
+    J -->|Prompt Engineering| K["Context + Query"]
+
+    K -->|Groq API (Llama 3)| L["Targeted Answer"]
 ```
 
 ---
