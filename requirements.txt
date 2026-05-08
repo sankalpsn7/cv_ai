@@ -1,0 +1,5 @@
+uvicorn main:app --reload
+.\venv\Scripts\Activate.ps1 // for backend venv activation in powershell
+..\backend\venv\Scripts\activate  //for frontend to activate backend venv
+
+streamlit run app.py

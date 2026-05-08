@@ -1,0 +1,27 @@
+# --- Python Artifacts ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# --- Environment Variables (CRITICAL) ---
+.env
+
+# --- Application Data ---
+temp_resumes/
+faiss_index/
+*.log
+
+# --- Streamlit ---
+.streamlit/
+
+# --- IDEs and OS Files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
