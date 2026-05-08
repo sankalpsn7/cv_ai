@@ -1,8 +1,8 @@
-# 🧠 Applied AI CV Analyzer & RAG Pipeline
+#  Applied AI CV Analyzer & RAG Pipeline
 
 > A resilient, backend-focused AI pipeline designed to evaluate candidate CVs against Job Descriptions using a hybrid architecture of local HuggingFace embeddings and Groq's blazing-fast LPU inference.
 
-## 🏗️ System Architecture
+##  System Architecture
 
 This project was engineered to demonstrate **scalable backend architecture, fault tolerance, and applied AI integration**. By decoupling the embedding generation from the cloud LLM, the system achieves zero-latency vectorization while completely bypassing third-party rate limits (429 errors).
 
@@ -15,18 +15,18 @@ This project was engineered to demonstrate **scalable backend architecture, faul
 
 ---
 
-## 🔄 Data Workflow
+##  Data Workflow
 
 ### 1. Ingestion & Evaluation Flow (Batch Processing)
 ```text
 
-# 🧠 Applied AI CV Analyzer & RAG Pipeline
+#  Applied AI CV Analyzer & RAG Pipeline
 
 > A resilient, backend-focused AI pipeline designed to evaluate candidate CVs against Job Descriptions using a hybrid architecture of local HuggingFace embeddings and Groq's blazing-fast LPU inference.
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 This project demonstrates **scalable backend architecture, fault tolerance, and applied AI integration**. By decoupling embedding generation from the cloud LLM, the system achieves zero-latency vectorization and bypasses third-party rate limits (429 errors).
 
@@ -114,6 +114,16 @@ Open your first terminal and navigate to the backend directory:
 
 ```bash
 cd backend
+
+# Create and activate a virtual environment
+python -m venv venv
+
+# Activate on Windows:
+venv\Scripts\activate
+# Activate on Mac/Linux:
+source venv/bin/activate
+
+# Install dependencies and run the server
 pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 5000 --reload
 ```
