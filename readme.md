@@ -60,19 +60,25 @@ flowchart TD
     C -->|Text Splitter| F[HuggingFace Local Embeddings]
     F -->|FAISS| G[Saved locally (/faiss_index) for RAG]
 ```
-
 ### 2. RAG Flow
 
 ```mermaid
 flowchart TD
-    H["User HR Query:<br/>Which candidate has experience with PostgreSQL?"]
-        -->|FastAPI /chat_cv| I["Local FAISS Index"]
 
-    I -->|Semantic Search| J["Top-K CV Chunks"]
+A["User HR Query"]
+B["FastAPI /chat_cv"]
+C["Local FAISS Index"]
+D["Top-K CV Chunks"]
+E["Context + Query"]
+F["Groq Llama 3"]
+G["Targeted Answer"]
 
-    J -->|Prompt Engineering| K["Context + Query"]
-
-    K -->|Groq API (Llama 3)| L["Targeted Answer"]
+A --> B
+B --> C
+C -->|Semantic Search| D
+D -->|Prompt Engineering| E
+E --> F
+F --> G
 ```
 
 ---
