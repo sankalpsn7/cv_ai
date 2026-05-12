@@ -1,10 +1,10 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables (like your GROQ_API_KEY)
+ 
 load_dotenv()
 
-# --- GLOBAL APP SETTINGS ---
+
 TEMP_DIR = "temp_resumes"
 INDEX_PATH = "faiss_index"
 

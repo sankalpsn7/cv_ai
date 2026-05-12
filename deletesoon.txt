@@ -1,4 +1,4 @@
-uvicorn main:app --reload
+uvicorn app.main:app --reload --port 5000
 .\venv\Scripts\Activate.ps1 // for backend venv activation in powershell
 ..\backend\venv\Scripts\activate  //for frontend to activate backend venv
 

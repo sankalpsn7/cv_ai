@@ -1,9 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List
 
 class CandidateAnalysis(BaseModel):
     candidate_name: str
-    ats_match_score: int
+    ats_match_score: int = Field(ge=0, le=100)
     strengths: List[str]
     red_flags: List[str]
     interview_questions: List[str]
@@ -17,12 +17,6 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     answer: str
-
-class JobDescription(BaseModel):
-    job_description: str
-
-class Resume(BaseModel):
-    resume: str
 
 
     

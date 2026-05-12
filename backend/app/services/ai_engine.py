@@ -14,18 +14,17 @@ from app.schemas.schemas import CandidateAnalysis
 logging.basicConfig(level=logging.INFO)
 
 # --- INITIALIZE MODELS ---
-# Using local HuggingFace for robust embeddings and Groq for blazing-fast LLM inference
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 llm = ChatGroq(
-    model_name="llama-3.1-8b-instant", 
+    model_name="llama-3.1-8b-instant", #actual reasoning model 
     temperature=0.2,
     max_retries=2
 )
 
 async def process_single_resume_with_llm(file_path: str, jd: str) -> CandidateAnalysis:
-    """Extracts text from a PDF and evaluates it against the JD using Groq."""
+  
     try:
-        # Isolate PDF loading to catch corrupted files without crashing
+        #  File Loading 
         try:
             loader = PyPDFLoader(file_path)
             docs = loader.load()
@@ -65,7 +64,7 @@ async def process_single_resume_with_llm(file_path: str, jd: str) -> CandidateAn
 
     except Exception as e:
         logging.error(f"Error processing {file_path}: {e}")
-        # Graceful degradation for the UI
+        
         return CandidateAnalysis(
             candidate_name=os.path.basename(file_path),
             ats_match_score=0,
@@ -79,7 +78,7 @@ async def initialize_rag_vectorstore(directory_path: str):
     """Chunks all uploaded PDFs and creates a persistent FAISS vector database."""
     documents = []
     
-    # --- ZONE 1: File Loading (Granular Try-Except per file) ---
+    # --- ZONE 1: File Loading ---
     for filename in os.listdir(directory_path):
         if filename.endswith(".pdf"):
             file_path = os.path.join(directory_path, filename)
@@ -118,14 +117,14 @@ async def initialize_rag_vectorstore(directory_path: str):
 async def query_rag_system(query: str) -> str:
     """Queries the local FAISS index to answer specific questions about the candidate pool."""
     try:
-        # Robust check to ensure the index files actually exist
+        
         faiss_file = os.path.join(INDEX_PATH, "index.faiss")
         pkl_file = os.path.join(INDEX_PATH, "index.pkl")
         
         if not (os.path.exists(faiss_file) and os.path.exists(pkl_file)):
             return "No index found. Please upload resumes first."
             
-        # Load from disk
+      
         vector_store = FAISS.load_local(INDEX_PATH, embeddings, allow_dangerous_deserialization=True)
         retriever = vector_store.as_retriever(search_kwargs={"k": 3})
         docs = await retriever.ainvoke(query)
